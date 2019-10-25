@@ -23,7 +23,7 @@ pipeline {
                 echo 'Start to build the project builder docker image'
                 script {
                     builderImage = docker.build("${ACCOUNT_REGISTRY_PREFIX}/example-webapp-builder:${GIT_COMMIT_HASH}", "-f ./Dockerfile.builder .")
-                    builderImage.push("{env.GIT_BRANCH}")
+                    builderImage.push("${env.GIT_BRANCH}")
                     builderImage.inside('-v $WORKSPACE:/output -u root'){
                         sh """
 							cd /output
@@ -38,7 +38,7 @@ pipeline {
                 echo 'Run unit tests in the builder image'
                 script {
                     builderImage = docker.build("${ACCOUNT_REGISTRY_PREFIX}/example-webapp-builder:${GIT_COMMIT_HASH}", "-f ./Dockerfile.builder .")
-                    builderImage.push("{env.GIT_BRANCH}")
+                    builderImage.push("${env.GIT_BRANCH}")
                     builderImage.inside('-v $WORKSPACE:/output -u root'){
                         sh """
 							cd /output
@@ -54,7 +54,7 @@ pipeline {
                 script {
                     productionImage = docker.build("${ACCOUT_REGISTRY_PREFIX}/example-webapp:${GIT_COMMIT_HASH}", " .")
                     productionImage.push()
-                    productionImage.push("{env.GIT_BRANCH}")
+                    productionImage.push("${env.GIT_BRANCH}")
                 }
             }
         }
