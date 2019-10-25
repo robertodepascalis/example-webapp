@@ -53,7 +53,6 @@ pipeline {
                 echo 'Starting to build docker image'
                 script {
 		    builderImage = docker.build("${ACCOUNT_REGISTRY_PREFIX}/example-webapp:${GIT_COMMIT_HASH}", " .")
-                    productionImage.push()
                     productionImage.push("${env.GIT_BRANCH}")
                 }
             }
