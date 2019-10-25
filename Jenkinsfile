@@ -18,10 +18,7 @@ pipeline {
                 }
             }
         }
-    }
-
-    stages {
-        stage('Make A Builder Image') {
+	stage('Make A Builder Image') {
             steps {
                 echo 'Start to build the project builder docker image'
                 script {
@@ -35,11 +32,8 @@ pipeline {
                     }
                 }
             }
-        }
-    }
-
-    stages {
-        stage('Unit Tests') {
+        }	
+	stage('Unit Tests') {
             steps {
                 echo 'Run unit tests in the builder image'
                 script {
@@ -54,10 +48,7 @@ pipeline {
                 }
             }
         }
-    }
-
-    stages {
-        stage('Build Production Image') {
+	stage('Build Production Image') {
             steps {
                 echo 'Starting to build docker image'
                 script {
